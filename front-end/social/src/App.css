@@ -1,0 +1,57 @@
+.vertical-nav {
+  height: 100vh; 
+  width: 150px; 
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+}
+.nav-link {
+  color: black;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  transition: color 0.3s; 
+  margin-top: 15px;
+  font-size: larger;
+}
+.nav-link i {
+  margin-right: 8px;
+  transition: color 0.3s;
+}
+.contact-link{
+  color: white; 
+  transition: color 1s, background-color 0.3s;
+
+  margin-top: 40px;
+
+
+}
+.contact-link i {
+  color: white; 
+  transition: color 0.3s; 
+
+}
+.nav-link:hover {
+  color: #1DA1F2; 
+}
+.nav-link:hover i {
+  color: #1DA1F2; 
+}
+.contact-link:hover {
+  color: black; 
+  background-color: white;
+  border: #1DA1F2 solid 2px;
+}
+.contact-link:hover i {
+  color: black; 
+}
+
+
+.contact-link{
+  background-color: #1DA1F2;
+  width: 110px;
+}
