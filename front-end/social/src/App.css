@@ -1,18 +1,42 @@
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+.row {
+  height: 100%; 
+  display: flex;
+}
+body{
+  height: 100dvh;;
+}
+.col-2 {
+  height: 100%;
+}
+.div-nav{
+  max-height: 100dvh;
+  box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.2);
+
+}
+.div-aside{
+  max-height: 100dvh;
+
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+}
 .vertical-nav {
-  height: 100vh; 
-  width: 150px; 
+  width: 100%;;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+
 }
 .nav-link {
   color: black;
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 10px 0;
   transition: color 0.3s; 
   margin-top: 15px;
@@ -25,9 +49,10 @@
 .contact-link{
   color: white; 
   transition: color 1s, background-color 0.3s;
-
+  justify-content: center;
   margin-top: 40px;
-
+  font-size: x-large;
+  max-width: 100%;
 
 }
 .contact-link i {
@@ -53,5 +78,29 @@
 
 .contact-link{
   background-color: #1DA1F2;
-  width: 110px;
+  width: 100%;
 }
+
+.aside-right {
+  height: 100% ;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding: 1rem; 
+}
+
+.search__input {
+  max-width: 200px; 
+  border: 1px solid #ccc;
+      transition: border-color 0.3s;
+}
+.search__input:focus {
+  border-color: #1DA1F2;
+  box-shadow: none;
+}
+.friends-suggestion {
+  width: 100%; 
+  margin-top: 1rem; 
+}
+
