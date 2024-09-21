@@ -104,3 +104,14 @@ body{
   margin-top: 1rem; 
 }
 
+
+
+/*login  */
+
+/* Error message styling */
+.text-red-500 {
+  color: #f56565;
+}
+.hidden {
+  display: none;
+}
