@@ -1,132 +1,69 @@
 import { useState } from 'react';
+import './style.css'
+
+
+
 
 const AuthForms = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [Action, setAction] = useState("Sign Up");
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
+  const [formData, setFormData] = useState({ Name: '',Username: '' ,Email: '' , Password: '' });
+
+  const handleSubmit = async (e) => {
+      e.preventDefault(); 
+
+      try {
+          const response = await fetch('http://localhost:5000/user/register', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+          console.log('Response from server:', result);
+      } catch (error) {
+          console.error('Error submitting form:', error);
+      }
   };
 
   return (
-    <div className="container mt-4  bg-gray-100 flex items-center justify-center min-h-screen">
-      <div className="row justify-content-center w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <div className="col-md-6">
-        <h2 class="text-2xl font-semibold text-center text-blue-600">BuzzHub - Register</h2>
-
-          <form
-            id="registerForm"
-            style={{ display: isLogin ? 'none' : 'block' }}
-            className="mt-4 space-y-4"
-          >
-            <div>
-              <label className="form-label  text-gray-700">Username</label>
-              <input
-                type="text"
-                id="username"
-                className="form-control w-full px-3 py-2 border rounded-md"
-                placeholder="Enter your username"
-                required
-              />
-              <p className="text-danger" id="usernameError">
-                Username is required.
-              </p>
-            </div>
-            <div className="mb-3">
-              <label className="form-label text-dark">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your email"
-                required
-              />
-              <p className="text-danger" id="emailError">
-                Valid email is required.
-              </p>
-            </div>
-            <div className="mb-3">
-              <label className="form-label text-dark">Password</label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your password"
-                required
-              />
-              <p className="text-danger" id="passwordError">
-                Password must be at least 8 characters.
-              </p>
-            </div>
-            <div className="mb-3">
-              <label className="form-label text-dark">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                className="form-control"
-                placeholder="Confirm your password"
-                required
-              />
-              <p className="text-danger" id="confirmPasswordError">
-                Passwords do not match.
-              </p>
-            </div>
-            <button
-              type="submit"
-              className="btn btn-primary w-100"
-            >
-              Register
-            </button>
-          </form>
-
-          <form
-            id="loginForm"
-            style={{ display: isLogin ? 'block' : 'none' }}
-          >
-            <div className="mb-3">
-              <label className="form-label text-dark">Email</label>
-              <input
-                type="email"
-                id="loginEmail"
-                className="form-control"
-                placeholder="Enter your email"
-                required
-              />
-              <p className="text-danger" id="loginEmailError">
-                Valid email is required.
-              </p>
-            </div>
-            <div className="mb-3">
-              <label className="form-label text-dark">Password</label>
-              <input
-                type="password"
-                id="loginPassword"
-                className="form-control"
-                placeholder="Enter your password"
-                required
-              />
-              <p className="text-danger" id="loginPasswordError">
-                Password is required.
-              </p>
-            </div>
-            <button
-              type="submit"
-              className="btn btn-primary w-100"
-            >
-              Login
-            </button>
-          </form>
-
-          <div className="text-center mt-3">
-            <button
-              onClick={toggleForm}
-              className="btn btn-secondary"
-            >
-              {isLogin ? 'Switch to Sign Up' : 'Switch to Login'}
-            </button>
-          </div>
+    <form onSubmit={handleSubmit} method='post' >
+    <div className="container">
+      <div className="header">
+        <div className="text">{Action}</div>
+        <div className="underline"></div>
+      </div>
+      <div className="inputs">
+        <div className={Action === "Login" ? "d-none" : "input"}>
+          <i className="fas fa-user"></i>
+          <input type="text" name='Name' placeholder='Name' onChange={(e)=>{setFormData({...formData , Name: e.target.value })}}/>
+          <span class="input-logo">@</span>
+          <input type='text' name='Username' placeholder='Username' onChange={(e)=>{setFormData({...formData , Username: e.target.value })}} />
+        </div>
+        <div className="input">
+          <i className="fas fa-envelope"></i>
+          <input type="email" name='Email' placeholder='Email' onChange={(e)=>{setFormData({...formData , Email: e.target.value })}} />
+        </div>
+        <div className="input">
+          <i className="fas fa-lock"></i>
+          <input type="password" name='Password' placeholder='Password' onChange={(e)=>{setFormData({...formData , Password: e.target.value })}}/>
         </div>
       </div>
+      <div className={Action === "Sign Up" ? "d-none forgot-password" : "forgot-password"}>Forgot password ? <span>Click here</span></div>
+      <div className="submit-container">
+        <button type="submit" className={Action === "Login" ? "submit gray" : "submit"} onClick={() => setAction("Sign Up")}>
+          Sign Up
+        </button>
+        <button type="submit" className={Action === "Sign Up" ? "submit gray" : "submit"} onClick={() => setAction("Login")}>
+          Log In
+        </button>
+
+      </div>
     </div>
+    </form>
+
   );
 };
 

@@ -35,11 +35,13 @@ var user = new Schema({
         required:[true,'phone number is required'],
         unique:[true, 'phone number already in use'],
         maxlength: 20,
-        minlength: 6
+        minlength: 6,
+        default: '02342334'
     },
     bio:{
         type:String,
-        maxlength: 200
+        maxlength: 200,
+    
     },
     adresse:{
         type:String,

@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import Form from './form/form';
 import Aside from './Mainpage/aside';
 import Nav from './Mainpage/nav';
@@ -9,6 +8,17 @@ import Nav from './Mainpage/nav';
 const MyComponent = () => {
   const [aut, setAuth] = useState(false);
   const [content, setContent] = useState(null);
+
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/api').then((data)=>{
+      setMessage(data.data.message)
+    }).catch(()=>{
+      setMessage('Error')
+    })
+  }, []);
 
   useEffect(() => {
     if (aut) {
@@ -29,11 +39,14 @@ const MyComponent = () => {
         </div>
       );
     } else {
-      setContent(<Form />);
+      setContent(<Form/>);
     }
   }, [aut]);
 
-  return content;
+  return <div className="App">
+  <h1>{message}</h1>
+  {content}
+</div> ;
 };
 
 export default MyComponent;
