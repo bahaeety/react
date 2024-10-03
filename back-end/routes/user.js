@@ -11,6 +11,8 @@ router.post('/register', (req,res)=>{
         username: Username,
         password: Password
     })
+    console.log()
+    console.log(user)
     user.save().then(()=>{
         console.log('user created')
     }).catch(()=>{
