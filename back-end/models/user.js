@@ -14,8 +14,8 @@ var user = new Schema({
     ,
     password:{
         type:String,
-        required:[true,'password is required']
-        // match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, "Password invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+        required:[true,'password is required'],
+        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, "Password invalid, it should contain 8-20 alphanumeric letters and be unique!"]
     },
     role:{
         type:String,
@@ -25,9 +25,7 @@ var user = new Schema({
     },
     phone_number:{
         type:String,
-        required:[true,'phone number is required'],
-
-        default: '2'
+        required:[true,'phone number is required']
     },
     bio:{
         type:String,

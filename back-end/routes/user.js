@@ -4,11 +4,12 @@ const Router = require('router');
 const router = Router();
 
 router.post('/register', (req,res)=>{
-    const {Username, Email, Name, Password } = req.body ;
+    const {Username, Email,Tel, Name, Password } = req.body ;
     const user = new User({
         name: Name,
         email: Email,
         username: Username,
+        tel: Tel,
         password: Password
     })
     console.log()

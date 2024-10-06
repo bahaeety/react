@@ -5,7 +5,7 @@ import { useState } from 'react';
 const AuthForms = () => {
   const [Action, setAction] = useState("Sign Up");
 
-  const [formData, setFormData] = useState({ Name: '',Username: '' ,Email: '' , Password: '' });
+  const [formData, setFormData] = useState({ Name: '',Username: '' ,Email: '' ,Tel:'' ,Password: '' });
 
   const handleSubmit = async (e) => {
       e.preventDefault(); 
@@ -46,6 +46,10 @@ const AuthForms = () => {
         <div className="input">
           <i className="fas fa-envelope"></i>
           <input type="email" name='Email' placeholder='Email' value={formData.Email} onChange={(e)=>{setFormData({...formData , Email: e.target.value })}} />
+        </div>
+        <div className="input">
+        <i className="fas fa-phone"></i>
+        <input type="tel" name='Tel' placeholder='tel' value={formData.Tel} onChange={(e)=>{setFormData({...formData , Tel: e.target.value })}} />
         </div>
         <div className="input">
           <i className="fas fa-lock"></i>

@@ -14,11 +14,12 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/user/register', async (req,res)=>{
-  const {Username, Email, Name, Password } = req.body ;
+  const {Username, Email,Tel, Name, Password } = req.body ;
   const user = new User({
       name: Name,
       email: Email,
       username: Username,
+      phone_number: Tel,
       password: Password
   })
   console.log(user);
