@@ -11,6 +11,8 @@ const AuthForms = () => {
       e.preventDefault(); 
       console.log('Form submitted. Action:', Action);
       console.log('Form data:', formData);
+
+      if(Action === "Sign Up"){
       try {
           const response = await fetch('http://localhost:5000/user/register', {
               method: 'POST',
@@ -26,7 +28,25 @@ const AuthForms = () => {
           console.log('Response from server:', result);
       } catch (error) {
           console.error('Error submitting form:', error);
-      }
+      }}
+      else if(Action === "Login"){
+        try {
+          const response = await fetch('http://localhost:5000/user/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+              }).then(()=>{
+                console.log('data submited')
+                });
+      const result = await response.json();
+      console.log('Response from server:', result);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        }
+
+
   };
 
   return (

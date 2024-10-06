@@ -1,6 +1,11 @@
 const express = require('express');
 const user = require('./routes/user')
 const cors = require('cors');
+const bcrypt = require('bcrypt')
+const session = require('express-session')
+
+
+
 const connection = require('./database/mongoose')
 const User = require('./models/user');
 
@@ -8,23 +13,17 @@ const app = express();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cors());
+app.use(session({
+    secret: 'key',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+        secure: true
+    }
+}))
 
-app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from the backend!' });
-});
+app.use('/user',user);
 
-app.post('/user/register', async (req,res)=>{
-  const {Username, Email,Tel, Name, Password } = req.body ;
-  const user = new User({
-      name: Name,
-      email: Email,
-      username: Username,
-      phone_number: Tel,
-      password: Password
-  })
-  console.log(user);
-  await user.save()
-})
-
-
-module.exports = app;
+module.exports = app;                        
