@@ -11,42 +11,48 @@ const AuthForms = () => {
       e.preventDefault(); 
       console.log('Form submitted. Action:', Action);
       console.log('Form data:', formData);
-
-      if(Action === "Sign Up"){
-      try {
+         if(Action === 'Sign Up'){
           const response = await fetch('http://localhost:5000/user/register', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify(formData),
+              body: JSON.stringify(formData)
           }).then(()=>{
             console.log('data submited')
           });
 
           const result = await response.json();
           console.log('Response from server:', result);
-      } catch (error) {
-          console.error('Error submitting form:', error);
-      }}
-      else if(Action === "Login"){
-        try {
-          const response = await fetch('http://localhost:5000/user/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
-              }).then(()=>{
-                console.log('data submited')
-                });
-      const result = await response.json();
-      console.log('Response from server:', result);
-      } catch (error) {
-        console.error('Error submitting form:', error);
         }
-
-
+        else if (Action === 'Login') {
+          try {
+              const response = await fetch('http://localhost:5000/user/login', {
+                  method: "POST",
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      Email: formData.Email,
+                      Password: formData.Password
+                  }),
+                  credentials: 'include' // Include credentials if using sessions
+              });
+      
+              // Check if the response is okay
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+      
+              // Now you can safely call response.json()
+              const result = await response.json();
+              console.log('Login Successful:', result.session);
+      
+          } catch (error) {
+              console.error('There was an error during login:', error);
+          }
+      }
+      
   };
 
   return (
@@ -67,7 +73,7 @@ const AuthForms = () => {
           <i className="fas fa-envelope"></i>
           <input type="email" name='Email' placeholder='Email' value={formData.Email} onChange={(e)=>{setFormData({...formData , Email: e.target.value })}} />
         </div>
-        <div className="input">
+        <div className={Action === "Login" ? "d-none" : "input"}>
         <i className="fas fa-phone"></i>
         <input type="tel" name='Tel' placeholder='tel' value={formData.Tel} onChange={(e)=>{setFormData({...formData , Tel: e.target.value })}} />
         </div>
@@ -81,7 +87,7 @@ const AuthForms = () => {
         <button type="submit" className= "submit" >
              {Action}
         </button>
-        <button type="submit" className="submit gray" onClick={() => Action === "Login" ? setAction("Sign Up"): setAction("Login")}>
+        <button  className="submit gray" onClick={(e) => {e.preventDefault();  Action === "Login" ? setAction("Sign Up"): setAction("Login")}}>
           Switch
         </button>
 
