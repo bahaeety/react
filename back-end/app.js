@@ -13,8 +13,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000', // your React app's URL
-    credentials: true, // Allow cookies to be sent
+    origin: 'http://localhost:3000', 
+    credentials: true, 
 }));
 app.use(session({
     secret: 'key',
