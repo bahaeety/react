@@ -7,7 +7,7 @@ const session_cheker =async ()=>{
       }
    )
    const response =await session.json()
-   if(!response.ok){
+   if(!session.ok){
       throw new Error(response.statusText)
    }
    return response

@@ -36,6 +36,11 @@ router.post('/login',async(req,res)=>{
     res.send({ message: "Login successful", user: user.username  , user1: req.session.id , user2: req.session.Username});
 
 })
+router.get('/logout',(req,res)=>{
+    req.session.destroy();
+    res.send({message:"Logged out"});
+
+})  
 router.get('/session-checker',(req,res)=>{
     if(req.session.id){
         res.send({message:"Session is active",user:req.session.id})

@@ -1,5 +1,5 @@
 import './style.css'
-
+import session_cheker from '../session-checker/session-cheker';
 import { useState } from 'react';
 
 const AuthForms = () => {
@@ -11,7 +11,6 @@ const AuthForms = () => {
     e.preventDefault(); 
     console.log('Form submitted. Action:', Action);
     console.log('Form data:', formData);
-  
     try {
       let response;
       if(Action === "Sign Up") {
@@ -48,6 +47,8 @@ const AuthForms = () => {
     } catch (error) {
       console.error('Error:', error.message);
     }
+    session_cheker();
+
   };
   
 
