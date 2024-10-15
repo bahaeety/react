@@ -8,6 +8,13 @@ var user = new Schema({
         required:[true,'name is required']
 
     },
+    username:{
+        type:String,
+        required:[true,'username is required'],
+        unique:true
+        
+    }
+    ,
     email:{
         type:String,
         required:[true,'email is required']

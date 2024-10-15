@@ -19,7 +19,7 @@ app.use(cors({
 app.use(session({
     secret: 'key',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie:{
         maxAge: 1000 * 60 * 60 * 24 * 7,
         httpOnly: true,

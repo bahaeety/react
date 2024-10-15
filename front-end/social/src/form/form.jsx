@@ -8,24 +8,48 @@ const AuthForms = () => {
   const [formData, setFormData] = useState({ Name: '',Username: '' ,Email: '' ,Tel:'' ,Password: '' });
 
   const handleSubmit = async (e) => {
-      e.preventDefault(); 
-      console.log('Form submitted. Action:', Action);
-      console.log('Form data:', formData);
-          const response = await fetch('http://localhost:5000/user/register', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData)
-          }).then(()=>{
-            console.log('data submited')
-          });
-
-          const result = await response.json();
-          console.log('Response from server:', result);
-        
-      
+    e.preventDefault(); 
+    console.log('Form submitted. Action:', Action);
+    console.log('Form data:', formData);
+  
+    try {
+      let response;
+      if(Action === "Sign Up") {
+        response = await fetch('http://localhost:5000/user/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to register');
+        }
+  
+      } else if (Action === "Login") {
+        response = await fetch('http://localhost:5000/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData),
+          credentials: 'include'
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to login');
+        }
+      }
+  
+      const result = await response.json();
+      console.log('Response from server:', result);
+  
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
+  
 
   return (
     <form onSubmit={handleSubmit} method='post' >
