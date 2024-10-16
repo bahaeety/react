@@ -38,6 +38,8 @@ router.post('/login',async(req,res)=>{
 })
 router.get('/logout',(req,res)=>{
     req.session.destroy();
+    res.clearCookie("connect.sid");
+    res.end();
     res.send({message:"Logged out"});
 
 })  

@@ -1,9 +1,12 @@
 import './style.css'
 import session_cheker from '../session-checker/session-cheker';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const AuthForms = () => {
   const [Action, setAction] = useState("Sign Up");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({ Name: '',Username: '' ,Email: '' ,Tel:'' ,Password: '' });
 
@@ -36,8 +39,11 @@ const AuthForms = () => {
           credentials: 'include'
         });
   
-        if (!response.ok) {
-          throw new Error('Failed to login');
+        if (response.ok) {
+          navigate('/home');
+        } else {
+          const result = await response.json();
+          console.error(result.message || 'Login failed');
         }
       }
   
