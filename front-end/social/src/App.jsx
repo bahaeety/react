@@ -5,7 +5,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 const routers = createBrowserRouter([
   {
-    path: '/login',  element: <AuthForms /> 
+    path: '/login',  element: <AuthForms />
   },
   {
     path: '/home', element: <Mycontent />
