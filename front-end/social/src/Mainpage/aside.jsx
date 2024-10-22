@@ -1,3 +1,4 @@
+import Chat from "./chat"
 function Aside (){
     return (
         <aside className="d-flex flex-column aside-right">
@@ -14,6 +15,7 @@ function Aside (){
         </form>
         <div className="friends-suggestion">
         </div>
+        <Chat/>
       </aside>
 
 
