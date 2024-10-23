@@ -4,7 +4,6 @@ import session_checker from './session-checker/session-cheker';
 
 import Aside from './Mainpage/aside';
 import Nav from './Mainpage/nav';
-import './App.css'
 
 
 const Mycontent = () => {

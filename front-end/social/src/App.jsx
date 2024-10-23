@@ -3,6 +3,7 @@ import Mycontent from './content';
 import AuthForms from './form/form';
 import Chat from './chatpage/chat'
 import { createBrowserRouter } from 'react-router-dom';
+import './App.css'
 
 const routers = createBrowserRouter([
   {
