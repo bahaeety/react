@@ -14,6 +14,7 @@ const session_cheker =async ()=>{
    }
    catch(e){
       console.log(e + "erreur dans la verification de la session")
+      return null;
    }
 
 }

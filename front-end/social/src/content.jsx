@@ -4,6 +4,7 @@ import session_checker from './session-checker/session-cheker';
 
 
 const Mycontent = () => {
+
 const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -13,7 +14,7 @@ const navigate = useNavigate();
         console.log("deja une session")
         navigate('/home');
       } else {
-        
+        console.log("pas de session")
         navigate('/login'); 
       }
     };

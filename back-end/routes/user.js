@@ -29,7 +29,7 @@ router.post('/login',async(req,res)=>{
         return res.status(400).send({message:"Invalid password"});
     }
 
-    req.session.id = user._id
+    req.session.User_id = user._id
     req.session.Username = user.username
 
     
@@ -44,11 +44,11 @@ router.get('/logout',(req,res)=>{
 
 })  
 router.get('/session-checker',(req,res)=>{
-    if(req.session.id){
-        res.send({message:"Session is active",user:req.session.id})
+    if(req.session.User_id){
+        res.send({message:"Session is active",user_id:req.session.User_id , username: req.session.Username})
         }
         else{
-            res.send({message:"Session is not active",user:req.session.id})
+            res.send({message:"Session is not active",user_id:null} )
     }
 })
 
