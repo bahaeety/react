@@ -117,30 +117,6 @@ export default function Detail_area(){
         </div>
         <div className="view-more">View More</div>
       </div>
-      <a
-        href="https://twitter.com/AysnrTrkk"
-        className="follow-me"
-        target="_blank"
-      >
-        <span className="follow-text">
-          <svg
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="css-i6dzq1"
-          >
-            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-          </svg>
-          Follow me on Twitter
-        </span>
-        <span className="developer">
-          <img src="https://pbs.twimg.com/profile_images/1253782473953157124/x56UURmt_400x400.jpg" />
-          Aysenur Turk — @AysnrTrkk
-        </span>
-      </a>
     </div>
   
 

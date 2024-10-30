@@ -139,12 +139,13 @@ html {
 }
 
 .header {
-  height: 80px;
+  height: 25px;
   width: 100%;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   padding: 0 20px;
+
 }
 
 .wrapper {
@@ -178,6 +179,8 @@ html {
   z-index: 3;
   position: relative;
   margin-left: 280px;
+  right: 52%;
+  bottom: 20px;
 }
 .search-bar input {
   height: 100%;
@@ -214,6 +217,9 @@ html {
   cursor: pointer;
   margin-left: auto;
   flex-shrink: 0;
+  z-index: 3;
+  position: relative;
+  bottom: 65px;
 }
 .user-settings > * + * {
   margin-left: 14px;
