@@ -1,11 +1,20 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, RouterProvider } from 'react-router-dom';
+//routing
+import { RouterProvider } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
+
+//components
 import Mycontent from './content';
 import AuthForms from './form/form';
 import Chat from './chatpage/chat';
 import Home from './Mainpage/home';
+
+//parent_routes
 import Protectedroute from './session-checker/protected_route';
-import { createBrowserRouter } from 'react-router-dom';
+import  ChatProvider  from './chatpage/chatProvider';
+
+//css:
 import './App.css'
+
 
 const routers = createBrowserRouter([
   {
@@ -18,7 +27,7 @@ const routers = createBrowserRouter([
     path: '/home', element:<Protectedroute><Home /></Protectedroute> 
   },
   {
-    path: '/chat', element: <Protectedroute><Chat /></Protectedroute>
+    path: '/chat', element: <ChatProvider><Protectedroute><Chat /></Protectedroute></ChatProvider>
   },
   
 ])

@@ -1,6 +1,5 @@
 import io from 'socket.io-client'
-import {useEffect} from "react"
-import { useState } from 'react'
+import {useEffect , useState } from "react"
 import Header from './header'
 import Wrapper from './wrapper/wrapper'
 import "./chat.css"
@@ -24,7 +23,7 @@ function Chat(){
         <div className="app">
             <Header />
   <div className="wrapper">
-    <Wrapper/>
+    <Wrapper socket = {socket} setMessage = {setMessage} messagereceived = {messagereceived} setMessagereceived = {setMessagereceived} send = {send} />
   </div>
   </div>
 

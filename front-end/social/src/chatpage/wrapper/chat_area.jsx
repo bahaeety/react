@@ -1,6 +1,7 @@
 import "../chat.css"
 
-export default function Chat_area(){
+export default function Chat_area(props){
+   
     return (
         <>
      <div className="chat-area">
