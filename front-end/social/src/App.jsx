@@ -10,7 +10,7 @@ import Home from './Mainpage/home';
 
 //parent_routes
 import Protectedroute from './session-checker/protected_route';
-import  ChatProvider  from './chatpage/chatProvider';
+import {ChatProvider}  from './chatpage/chatProvider';
 
 //css:
 import './App.css'
@@ -27,7 +27,12 @@ const routers = createBrowserRouter([
     path: '/home', element:<Protectedroute><Home /></Protectedroute> 
   },
   {
-    path: '/chat', element: <ChatProvider><Protectedroute><Chat /></Protectedroute></ChatProvider>
+    path: '/chat', element: 
+    <Protectedroute>
+      <ChatProvider>
+        <Chat />
+      </ChatProvider>
+    </Protectedroute>
   },
   
 ])
