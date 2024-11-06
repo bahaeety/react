@@ -5,7 +5,7 @@ import ChatContext from "../chatProvider";
 export default function Chat_area() {
   const { message, setMessage, messagereceived, setMessagereceived, socket, send } = useContext(ChatContext);
   const [message_appeared, setMessageAppeared] = useState([]);
-
+console.log(messagereceived)
   const handleSendMessage = (event) => {
     if (event.key === 'Enter') {
       setMessageAppeared((prev) => [...prev, { message, sender: true }]); 

@@ -20,7 +20,7 @@ function Chat(){
         });
       
       
-      }, [socket]);
+      });
     return (
       <div className="app">
             <Header />
