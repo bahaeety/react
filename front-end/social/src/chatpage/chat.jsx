@@ -13,13 +13,14 @@ function Chat(){
         socket.emit("send_message",{
             message
         })
-        setMessage('');
     }
-    useEffect(()=>{
-    socket.on("receive_message",(data)=>{
-        setMessagereceived((prev) => [...prev, data.message]);     
-    })
-},[socket])
+    useEffect(() => {
+        socket.on('message', (incomingMessage) => {
+          setMessagereceived((prevMessages) => [...prevMessages, incomingMessage]);
+        });
+      
+      
+      }, [socket]);
     return (
       <div className="app">
             <Header />
