@@ -43,6 +43,29 @@ var user = new Schema({
         type:String,
         maxlength: 200
 
+    },
+    image:{
+        type:String
+    },
+    posts:{
+        type:Array,
+        default:[]
+    },
+    comments:{
+        type:Array,
+        default:[]
+    },
+    followers:{
+        type:Array,
+        default:[]
+    },
+    following:{
+        type:Array,
+        default:[]
+    },
+    likes:{
+        type:Array,
+        default:[]
     }
 
     }
