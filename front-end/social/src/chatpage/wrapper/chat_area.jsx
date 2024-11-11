@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState , useContext} from 'react';
 import '../chat.css';
-
+import {Chat_context} from "../chat";
 export default function Chat_area({ messages, setMessages, socket }) {
   const [inputMessage, setInputMessage] = useState('');
+  const [profileImage, setProfileImage] = useContext(Chat_context);
 
   const handleSendMessage = (event) => {
     if (event.key === 'Enter') {
@@ -32,7 +33,7 @@ export default function Chat_area({ messages, setMessages, socket }) {
                   className="chat-msg-img"
                   src={
                     msg.sender
-                      ? 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png'
+                      ? profileImage || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png'
                       : 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png'
                   }
                   alt=""

@@ -41,6 +41,16 @@ router.post('/login',async(req,res)=>{
     res.send({ message: "Login successful", user: user.username  , user1: req.session.id , user2: req.session.Username});
 
 })
+
+
+router.get('/logout',(req,res)=>{
+    req.session.destroy();
+    res.clearCookie("connect.sid");
+    res.end();
+    res.send({message:"Logged out"});
+
+})  
+// profile picture : 
 router.post('/image', upload.single('profile'), async (req, res) => {
     console.log(req.session)
     const user = await User.findOne({ _id: req.session.User_id });
@@ -50,22 +60,19 @@ router.post('/image', upload.single('profile'), async (req, res) => {
         .resize(40, 40)
         .png({ quality: 100 })
         .toBuffer();
-      user.profileImage = resizedImageBuffer.toString('base64');
+      user.image = resizedImageBuffer.toString('base64');
       await user.save();
-      res.json({ message: 'Profile image uploaded successfully' , image: user.profileImage});
+      res.json({ message: 'Profile image uploaded successfully' , image: user.image});
     } else {
       res.status(400).json({ message: 'No file uploaded' });
     }
   });
-  
-
-router.get('/logout',(req,res)=>{
-    req.session.destroy();
-    res.clearCookie("connect.sid");
-    res.end();
-    res.send({message:"Logged out"});
-
-})  
+router.get('/image',async(req,res)=>{
+    const user_id = req.session.User_id;
+    if(!user_id) return res.json("no session found to get the profile picture")
+    const user = await User.findOne({ _id: user_id });
+    res.json({ image: user.image });
+})
 router.get('/session-checker',(req,res)=>{
     if(req.session.User_id){
         res.send({message:"Session is active",user_id:req.session.User_id , username: req.session.Username})

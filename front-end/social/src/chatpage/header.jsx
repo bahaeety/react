@@ -1,12 +1,41 @@
 import "./chat.css"
-import { useState} from 'react';
+import { useState, useRef,useEffect, useContext} from 'react';
+import {Chat_context} from "./chat";
 import axios from "axios";
 
 export default function Header(){
-  const [file, setFile] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useContext(Chat_context);
+  const input_file = useRef(null)
 
-  const handleFile = async () => {
+  useEffect(()=>{
+      const profile_picture = async()=>{
+        const response = await axios.get('http://localhost:5000/user/image',{
+          withCredentials: true,
+        })
+        if(response.data){
+          console.log(response.data.image)
+          setProfileImage(`data:image/png;base64,${response.data.image}`)
+        }else{
+          setProfileImage('https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png');
+
+        }
+      }
+      profile_picture()
+  },[])
+
+  const handleImageClick = ()=>{
+    input_file.current.click()
+  }
+
+  const handleinput = (e)=>{
+    const file = e.target.files[0];
+  
+    if (file) {
+      handleFile(file);
+    }
+  }
+
+  const handleFile = async (file) => {
     if (!file) return;
     const fd = new FormData();
     fd.append('profile', file);
@@ -75,12 +104,13 @@ export default function Header(){
         className="user-profile"
         src={profileImage || "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"}
         alt="User Prodile"
+        onClick={handleImageClick}
       />
        <input
                 type="file"
                 accept="image/*"
-              
-                onChange={(e)=>{setFile(e.target.files[0])}}
+                ref={input_file}
+                onChange={handleinput}
                 style={{display: "none"}}
                 name="profile"               
             />

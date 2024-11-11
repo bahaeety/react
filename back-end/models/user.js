@@ -45,7 +45,8 @@ var user = new Schema({
 
     },
     image:{
-        type:String
+        type:String,
+        default:""
     },
     posts:{
         type:Array,
