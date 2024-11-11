@@ -1,8 +1,40 @@
 import "./chat.css"
 import { useState} from 'react';
+import axios from "axios";
 
 export default function Header(){
+  const [file, setFile] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
+  const handleFile = async () => {
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('profile', file);
+  
+    try {
+      const upload = await axios.post('http://localhost:5000/user/image', fd, {
+        withCredentials: true, 
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (ProgressEvent) => {
+          const percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total);
+          console.log(percentCompleted);
+        },
+      });
+      
+  
+      const result = upload.data;
+      console.log(result);
+  
+      if (result.image) {
+        setProfileImage(`data:image/png;base64,${result.image}`);
+      }
+    } catch (error) {
+      console.error('Upload failed:', error);
+    }
+  };
+  
     return (
       <>
       <div className="header">
@@ -41,15 +73,19 @@ export default function Header(){
       <div>
       <img
         className="user-profile"
-        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"
-        alt=""
+        src={profileImage || "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"}
+        alt="User Prodile"
       />
        <input
                 type="file"
                 accept="image/*"
-                style={{ display: 'none' }} 
+              
+                onChange={(e)=>{setFile(e.target.files[0])}}
+                style={{display: "none"}}
+                name="profile"               
             />
       </div>
+  
     </div>
   </div>
       </>

@@ -1,10 +1,15 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const sharp = require('sharp');
 
 const router = express.Router();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const User = require('../models/user');
 
-router.post('/register', async (req, res) => {
+router.post('/register',async (req, res) => {
     const { Username, Email, Tel, Name, Password } = req.body;
     
     const user = new User({
@@ -36,6 +41,24 @@ router.post('/login',async(req,res)=>{
     res.send({ message: "Login successful", user: user.username  , user1: req.session.id , user2: req.session.Username});
 
 })
+router.post('/image', upload.single('profile'), async (req, res) => {
+    console.log(req.session)
+    const user = await User.findOne({ _id: req.session.User_id });
+  
+    if (req.file) {
+        const resizedImageBuffer = await sharp(req.file.buffer)
+        .resize(40, 40)
+        .png({ quality: 100 })
+        .toBuffer();
+      user.profileImage = resizedImageBuffer.toString('base64');
+      await user.save();
+      res.json({ message: 'Profile image uploaded successfully' , image: user.profileImage});
+    } else {
+      res.status(400).json({ message: 'No file uploaded' });
+    }
+  });
+  
+
 router.get('/logout',(req,res)=>{
     req.session.destroy();
     res.clearCookie("connect.sid");

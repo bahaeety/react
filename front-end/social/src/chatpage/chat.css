@@ -241,7 +241,13 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  transition: opacity 0.3s;
 }
+
+.user-profile:hover {
+  opacity: 0.8;
+}
+
 
 .settings {
   color: var(--settings-icon-color);

@@ -1,3 +1,5 @@
+//css:
+import './App.css'
 //routing
 import { RouterProvider } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
@@ -12,8 +14,7 @@ import Home from './Mainpage/home';
 import Protectedroute from './session-checker/protected_route';
 import {ChatProvider}  from './chatpage/chatProvider';
 
-//css:
-import './App.css'
+
 
 
 const routers = createBrowserRouter([
