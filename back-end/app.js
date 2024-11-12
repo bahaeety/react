@@ -19,13 +19,13 @@ app.use(cors({
 app.use(session({
     secret: 'key',
     resave: false,
-    saveUninitialized: true,
-    cookie:{
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
         httpOnly: true,
-        secure: false
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
     }
-}))
+}));
 
 app.use('/user',user);
 

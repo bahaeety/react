@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700&display=swap&subset=latin-ext");
+
+:root {
+  --main-blue: #0086ff; /* Blue from existing theme */
+  --background-white: #ffffff;
+  --text-gray: #273346;
+  --input-bg: #f8f8fa;
+  --input-border: #eef2f4;
+  --button-bg: #f0f7ff;
+  --button-hover: #0086ff;
+}
+
+.contact-support {
+  background-color: var(--background-white);
+  color: var(--text-gray);
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-support h2 {
+  color: var(--main-blue);
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.contact-support p {
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+
+.support-form .form-group {
+  margin-bottom: 1em;
+}
+
+.support-form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.support-form input,
+.support-form textarea {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  font-family: "Manrope", sans-serif;
+  color: var(--text-gray);
+}
+
+.support-form input::placeholder,
+.support-form textarea::placeholder {
+  color: var(--input-border);
+}
+
+.support-form .submit-btn {
+  background-color: var(--button-bg);
+  color: var(--main-blue);
+  border: none;
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.support-form .submit-btn:hover {
+  background-color: var(--button-hover);
+  color: var(--background-white);
+}
