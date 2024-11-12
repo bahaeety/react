@@ -1,8 +1,7 @@
 //css:
 import './App.css'
 //routing
-import { RouterProvider } from 'react-router-dom';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 //components
 import Mycontent from './content';
