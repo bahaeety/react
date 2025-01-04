@@ -1,7 +1,6 @@
 const express = require('express');
 const user = require('./routes/user')
 const cors = require('cors');
-const bcrypt = require('bcrypt')
 const session = require('express-session')
 
 
