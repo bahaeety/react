@@ -2,7 +2,7 @@ import './style.css'
 import session_cheker from '../session-checker/session-cheker';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import form_api from '../api/form_api';
 
 const AuthForms = () => {
   const [Action, setAction] = useState("Sign Up");
@@ -14,43 +14,51 @@ const AuthForms = () => {
     e.preventDefault(); 
     console.log('Form submitted. Action:', Action);
     console.log('Form data:', formData);
+
+    formData.Name = formData.Name.trim();
+    formData.Username = formData.Username.trim();
+    formData.Email = formData.Email.trim();
+    formData.Tel = formData.Tel.trim();
+    formData.Password = formData.Password.trim();
+
     try {
       let response;
-      if(Action === "Sign Up") {
-        response = await fetch('http://localhost:5000/user/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+      switch (Action) {
+        case 'Sign Up':
+          if(formData.Name === '' || formData.Username === '' || formData.Email === '' || formData.Tel === '' || (formData.Password === '' || formData.Password.length < 8 || formData.Password.length > 16 ) ){
+            console.error('Please fill all the fields');
+            break;
+          }
+        response = await form_api.post('/register', formData , {
+          withCredentials: true,
         });
   
         if (!response.ok) {
           throw new Error('Failed to register');
         }
-  
-      } else if (Action === "Login") {
-        response = await fetch('http://localhost:5000/user/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData),
-          credentials: 'include'
-        });
-  
-        if (response.ok) {
-          navigate('/home');
-        } else {
-          const result = await response.json();
-          console.error(result.message || 'Login failed');
-        }
+        break;
+        case 'Login':
+          if(formData.Email === '' || formData.Password === ''){
+            console.error('Please fill all the fields');
+            break;
+          }
+          response = await  form_api.post('/login', formData,{
+            withCredentials: true,
+          });
+    
+            navigate('/home');
+            console.error(response.data || 'Login failed');
+          
+          break;
+          default:
+            console.error('Invalid action');
+          return;
+
+      } 
+      console.log('Response from server:', response.data);
       }
   
-      const result = await response.json();
-      console.log('Response from server:', result);
-  
-    } catch (error) {
+     catch (error) {
       console.error('Error:', error.message);
     }
     session_cheker();
