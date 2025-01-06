@@ -2,6 +2,7 @@ const express = require('express');
 const user = require('./routes/user')
 const cors = require('cors');
 const session = require('express-session')
+const {sessionStore} = require('./database/mongoose')
 
 
 
@@ -17,6 +18,7 @@ app.use(cors({
 }));
 app.use(session({
     secret: 'key',
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: {

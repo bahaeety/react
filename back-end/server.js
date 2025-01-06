@@ -9,8 +9,13 @@ const io = new Server(server,{
     methods: ["GET", "POST"],
   }
 })
+const online_users = new Map();
+
 io.on("connection",(socket)=>{
 console.log("user connected");
+socket.on("user_connected",(user_id)=>{
+  online_users.set(user_id,socket.id);
+})
 socket.on("send_message",(data)=>{
   socket.broadcast.emit("receive_message", data)
 })

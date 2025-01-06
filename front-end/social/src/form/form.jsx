@@ -33,18 +33,15 @@ const AuthForms = () => {
           withCredentials: true,
         });
   
-        if (!response.ok) {
-          throw new Error('Failed to register');
-        }
+      
         break;
         case 'Login':
           if(formData.Email === '' || formData.Password === ''){
             console.error('Please fill all the fields');
             break;
           }
-          response = await  form_api.post('/login', formData,{
-            withCredentials: true,
-          });
+          console.log('Login form submitted : ', formData);
+          response = await  form_api.post('/login', formData , { withCredentials: true });
     
             navigate('/home');
             console.error(response.data || 'Login failed');

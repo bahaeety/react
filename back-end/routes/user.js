@@ -24,7 +24,9 @@ router.post('/register',async (req, res) => {
 });
 
 router.post('/login',async(req,res)=>{
+
     const {Email,Password} = req.body;
+    console.log(Email)
     const user = await User.findOne({email:Email});
     if(!user){
         return res.status(400).send({message:"User not found"});
@@ -43,14 +45,18 @@ router.post('/login',async(req,res)=>{
 })
 
 
-router.get('/logout',(req,res)=>{
-    req.session.destroy();
-    res.clearCookie("connect.sid");
-    res.end();
-    res.send({message:"Logged out"});
+    router.post('/logout', (req, res) => {
+        req.session.destroy(err => {
+          if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).json({ message: 'Logout failed' });
+          }
+          res.clearCookie('connect.sid'); 
+          res.status(200).json({ message: 'Logged out successfully' });
+        });
+      });
 
-})  
-// profile picture : 
+
 router.post('/image', upload.single('profile'), async (req, res) => {
     console.log(req.session)
     const user = await User.findOne({ _id: req.session.User_id });

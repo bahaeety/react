@@ -1,26 +1,17 @@
 import { useNavigate , Link as A } from 'react-router-dom';
-
+import form_api from '../api/form_api';
 
 function Nav() {
   const navigate = useNavigate();
 
   const log_out = async () => {
     try {
-      const response = await fetch("http://localhost:5000/user/logout", {
-        method: 'GET',
-        credentials: 'include', 
-      });
-
-      if (response.ok) {
-        navigate("/login");  
-      } else {
-        const data = await response.json();
-        console.error("Failed to log out: ", data);
-      }
-
+      await form_api.post('/logout', {}, { withCredentials: true });
+      console.log('Logged out successfully');
+      navigate('/login');
     } catch (error) {
-      console.error("Error logging out: ", error);
-    }
+      console.error('Error logging out:', error.response?.data || error.message);
+    } 
   };
 
   return (

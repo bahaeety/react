@@ -1,7 +1,7 @@
 import { useState , useContext} from 'react';
 import '../chat.css';
 import {Chat_context} from "../chat";
-export default function Chat_area({ messages, setMessages, socket }) {
+export default function Chat_area({ messages, setMessages, socket, selectedContact  }) {
   const [inputMessage, setInputMessage] = useState('');
   const [profileImage, setProfileImage] = useContext(Chat_context);
 
@@ -20,21 +20,25 @@ export default function Chat_area({ messages, setMessages, socket }) {
 
   return (
     <div className="chat-area">
-      <div className="chat-area-header">
-        <div className="chat-area-title">CodePen Group</div>
-      </div>
+      <div className="chat-area-title">
+                 <img
+                  className="chat-msg-img"
+                  src={ selectedContact?.profile || "default-sender.png"}
+                  alt=""
+                />          {selectedContact ? selectedContact.name : "Select a contact to chat"}
+        </div>
 
       <div className="chat-area-main">
         {Array.isArray(messages) &&
           messages.map((msg, index) => (
             <div className={`chat-msg ${msg.sender ? 'owner' : 'receiver'}`} key={index}>
               <div className="chat-msg-profile">
-                <img
+              <img
                   className="chat-msg-img"
                   src={
                     msg.sender
-                      ? profileImage || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png'
-                      : 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png'
+                      ?profileImage 
+                      : selectedContact?.profile || "default-sender.png"
                   }
                   alt=""
                 />
