@@ -13,11 +13,21 @@ const online_users = new Map();
 
 io.on("connection",(socket)=>{
 console.log("user connected");
-socket.on("user_connected",(user_id)=>{
-  online_users.set(user_id,socket.id);
+socket.on("user_connected",(username)=>{
+  online_users.set(username,socket.id);
 })
-socket.on("send_message",(data)=>{
-  socket.broadcast.emit("receive_message", data)
+socket.on("disconnect",()=>{
+  for (const [key, value] of online_users.entries()) {
+    if(value === socket.id){
+      online_users.delete(key);
+    }
+  }
+})
+
+socket.on("send_message",({recipient , message})=>{
+  if(online_users.has(recipient)){
+    io.to(online_users.get(recipient)).emit("receive_message",{message, sender:recipient})
+  }
 })
 })
 
